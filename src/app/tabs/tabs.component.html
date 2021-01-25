@@ -1,0 +1,362 @@
+  <mat-card>
+    <mat-card-header class="card-header" fxLayout="row" >
+        <div fxFlex="50"fxLayoutAlign="start center">
+            <mat-card-title>Set a Frequency</mat-card-title>
+        </div>
+        <div fxFlex="50">
+            <mat-card-title fxLayoutAlign="end center">
+                <button mat-button (click)="onClickDown()"> 
+                    <span class="material-icons">keyboard_backspace</span>  
+                    <label>BACK</label>
+                </button>
+            </mat-card-title>
+        </div>
+    </mat-card-header>
+
+    <mat-card-content>
+        <mat-tab-group [(selectedIndex)]="tabIndex">
+            <mat-tab label="DAILY">
+                <form [formGroup]="recurringForm" fxLayout="column" fxFlex="100">
+                    <div fxLayout="column">
+                        <div fxFlex="50">
+                            <div fxLayout="row" fxFlex="10"></div>
+                            <div fxLayout="row" fxFlex="60"  class="daily" fxLayoutAlign="start center">    
+                                <label>Every</label>
+                                <input 
+                                    class="line  ends_after_input" 
+                                    type="number" 
+                                    value="1" readonly>
+                                <mat-label>Day at</mat-label> &nbsp;
+                                <input class="dat" type="time">
+                            </div>
+                        </div>
+                        <div>
+                            <div fxLayout="row" fxFlex="10"  class="starts_form"></div>
+                            <div fxLayout="row" fxFlex="100"  class="bgcor1" fxLayoutAlign="start center">
+                                <div fxLayout="column" fxFlex="100">
+                                    <label><b>STARTS FROM</b></label>
+                                    <span><input
+                                           type="hidden"
+                                           ngbDatepicker
+                                           #datepicker="ngbDatepicker"
+                                           (dateSelect)="dateSelected($event)"
+                                         >
+                                        </span>
+                                        
+                                    <div fxLayout="row" fxFlex="50" class="white">
+                                        <input (click)="datepicker.toggle()"
+                                        class="form-control"
+                                        name="dpFromDate"
+                                        #dpFromDate
+                                        [value]="formatter.format(f['startDate'].value)"
+                                        (input)="setStartDate(dpFromDate.value)"
+                                      >
+                                    </div>
+                                    <mat-radio-group [(ngModel)]="radioSelected" [ngModelOptions]="{standalone: true}">
+                                    <div fxLayout="column" fxFlex="100">
+                                        <div fxLayout="row"  fxFlex="50">
+                                            <div fxLayout="column" fxFlex="50">
+                                                <p class="p_text">ENDS BY </p>
+                                                <mat-radio-button name="end" value="1" checked="true"  fxLayoutAlign="start center">
+                                                    <div fxLayout="row" class="white">
+                                                        <input #dpToDate
+                                                        (click)="datepicker.toggle()"
+                                                        class="form-control" 
+                                                        name="dpToDate"
+                                                        [value]="formatter.format(f['endDate'].value)"
+                                                        (input)="setEndDate(dpToDate.value)">
+                                                    </div>
+                                                </mat-radio-button>
+                                            </div>
+                                            <div fxLayout="column" fxFlex="50">
+                                                <p class="p_text">ENDS AFTER</p>
+                                                <mat-radio-button name="end" value="2" fxLayoutAlign="start center">
+                                                    <div fxLayout="row" class="bgcor">
+                                                        <input class="line ends_after_input" 
+                                                            type="number"  value="{{dates.length}}"
+                                                            formControlName="occurence"
+                                                             readonly>
+                                                        <label class="occenence_label">Occurence</label>
+                                                    </div>
+                                                </mat-radio-button>
+                                            </div>
+                                            <div fxLayout="column"  fxFlex="50" >
+                                                <p class="p_text">ONGOING</p>
+                                                <mat-radio-button name="end" value="3" fxLayoutAlign="start center">
+                                                    <div fxLayout="row" class="bgcor">
+                                                        <label class="ongoing" >The responsibility will<br>perpetually exist</label>
+                                                    </div>
+                                                </mat-radio-button>
+                                           </div>
+                                       
+                                        </div>
+                                    </div>
+                                </mat-radio-group>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </form>
+            </mat-tab>
+
+            <mat-tab label="WEEKLY">
+                <form [formGroup]="recurringForm" fxLayout="column" fxFlex="100">
+                    <div fxLayout="column" >
+                        <div class="checkBox" fxFlex="100" fxLayout="row" fxLayoutGap="10px"  fxLayoutAlign="center">
+                            <div fxLayout="row" formArrayName="onWeekday" *ngFor="let weekday of weekdays; let i = index">
+                                    <mat-checkbox fxFlex="10"  [formControlName]="i">
+                                      {{weekday}}
+                                    </mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                    <div fxLayout="column">
+                        <div fxFlex="50">
+                            <div fxLayout="row" fxFlex="10"></div>
+                            <div fxLayout="row" fxFlex="60"  class="daily" fxLayoutAlign="start center">    
+                                <label>Every</label>
+                                <input 
+                                    class="line  ends_after_input" 
+                                    type="number" 
+                                    value="1" readonly>
+                                <mat-label>Week at</mat-label> &nbsp;
+                                <input class="dat" type="time">
+                            </div>
+                        </div>
+                        <div>
+                            <div fxLayout="row" fxFlex="10"  class="starts_form"></div>
+                            <div fxLayout="row" fxFlex="100"  class="bgcor1" fxLayoutAlign="start center">
+                                <div fxLayout="column" fxFlex="100">
+                                    <label><b>STARTS FROM</b></label>
+                                    <span><input
+                                           type="hidden"
+                                           ngbDatepicker
+                                           #datepicker="ngbDatepicker"
+                                           (dateSelect)="dateSelected($event)"
+                                         >
+                                        </span>
+                                        
+                                    <div fxLayout="row" fxFlex="50" class="white">
+                                        <input (click)="datepicker.toggle()"
+                                        class="form-control"
+                                        name="dpFromDate"
+                                        #dpFromDate
+                                        [value]="formatter.format(f['startDate'].value)"
+                                        (input)="setStartDate(dpFromDate.value)"
+                                      >
+                                    </div>
+                                    <mat-radio-group [(ngModel)]="radioSelected" [ngModelOptions]="{standalone: true}">
+                                    <div fxLayout="column" fxFlex="100">
+                                        <div fxLayout="row"  fxFlex="50">
+                                            <div fxLayout="column" fxFlex="50">
+                                                <p class="p_text">ENDS BY </p>
+                                                <mat-radio-button name="end" value="1" checked="true"  fxLayoutAlign="start center">
+                                                    <div fxLayout="row" class="white">
+                                                        <input #dpToDate
+                                                        (click)="datepicker.toggle()"
+                                                        class="form-control" 
+                                                        name="dpToDate"
+                                                        [value]="formatter.format(f['endDate'].value)"
+                                                        (input)="setEndDate(dpToDate.value)">
+                                                    </div>
+                                                </mat-radio-button>
+                                            </div>
+                                            <div fxLayout="column" fxFlex="50">
+                                                <p class="p_text">ENDS AFTER</p>
+                                                <mat-radio-button name="end" value="2" fxLayoutAlign="start center">
+                                                    <div fxLayout="row" class="bgcor">
+                                                        <input class="line ends_after_input" 
+                                                            type="number"  value="{{dates.length}}"
+                                                            formControlName="occurence"
+                                                             readonly>
+                                                        <label class="occenence_label">Occurence</label>
+                                                    </div>
+                                                </mat-radio-button>
+                                            </div>
+                                            <div fxLayout="column"  fxFlex="50" >
+                                                <p class="p_text">ONGOING</p>
+                                                <mat-radio-button name="end" value="3" fxLayoutAlign="start center">
+                                                    <div fxLayout="row" class="bgcor">
+                                                        <label class="ongoing" >The responsibility will<br>perpetually exist</label>
+                                                    </div>
+                                                </mat-radio-button>
+                                           </div>
+                                       
+                                        </div>
+                                    </div>
+                                </mat-radio-group>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                </form>
+            </mat-tab>
+
+            
+            <mat-tab label="MONTHLY">
+                <div class="date" fxLayout="column" fxFlex="100" fxLayoutAlign="start">
+                    <div fxLayout="row">
+                        <span class="row">
+                            <label>Day</label> &nbsp;
+                            <input class="line" type="number" value="1" readonly>
+                            <mat-label>of</mat-label> &nbsp;
+                            <input class="dat" type="time">
+                        </span>
+                    </div>
+                </div>
+                <div class="checkBox" fxFlex="100" fxLayout="row" fxLayoutGap="10px">
+                    <div fxFlex="3"></div>
+                    <mat-checkbox (click)="selectedMonths(m)" fxFlex="10" *ngFor="let m of months">{{m}}</mat-checkbox>
+                </div>
+                <div class="day">
+                    <form [formGroup]="weeklyForm" fxLayout="column" fxFlex="100">
+                        <div fxLayout="column">
+                            <div fxLayout="row" fxFlex="100" fxLayoutAlign="center">
+                                <mat-form-field class="start">
+                                    <label>STARTS FROM</label>
+                                    <mat-datepicker #picker4></mat-datepicker>
+                                    <input class="form-control" matInput
+                                        [max]="startEndDatesForm.controls['endDate'].value" formControlName="startDate"
+                                        [matDatepicker]="picker4" (dateInput)="addEvent('input', $event)">
+                                    <mat-datepicker-toggle matSuffix [for]="picker4"></mat-datepicker-toggle>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" class="fff" fxFlex="100">
+                                <mat-radio-group fxLayout="row" fxFlex="100" formControlName="valueRadio">
+                                    <mat-radio-button name="end" value="1" fxFlex="50">
+                                        <div>
+                                            <mat-form-field class="formArea">
+                                                <label>ENDS BY</label>
+                                                <mat-datepicker #picker5>
+                                                </mat-datepicker>
+                                                <input class="form-control" matInput name="edn"
+                                                    [min]="startEndDatesForm.controls['startDate'].value"
+                                                    formControlName="endDate" [matDatepicker]="picker5" readonly>
+                                                <mat-datepicker-toggle matSuffix [for]="picker5">
+                                                </mat-datepicker-toggle>
+                                            </mat-form-field>
+                                        </div>
+                                    </mat-radio-button>
+                                    <mat-radio-button name="end" value="2" fxFlex="50">
+                                        <div fxLayoutAlign="center">
+                                            <mat-form-field class="formArea">
+                                                <div fxLayout="row" fxFlex="50">
+                                                    
+                                                    <input name="edn" matInput formControlName="occurence" class="line"
+                                                        type="number">
+                                                    <p>Occurances</p> &nbsp;
+                                                </div>
+                                            </mat-form-field>
+                                        </div>
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="QUARTERLY"></mat-tab>
+
+
+            <mat-tab label="YEARLY">
+                <div class="date" fxLayout="column" fxFlex="100" fxLayoutAlign="start">
+                    <div fxFlex="5" fxLayout="row"></div>
+                    <div fxLayout="row">
+                        <span class="row">
+                            <label>Every</label> &nbsp;
+                            <input class="line" type="number" value="1" readonly>
+                            <mat-label>Year of Day</mat-label> &nbsp;
+                            <input class="dat" type="time">
+                        </span>
+                    </div>
+                </div>
+                <div class="checkBox" fxFlex="100" fxLayout="row" fxLayoutAlign="center">
+                    <div fxFlex="3"></div>
+                    <mat-radio-group  fxLayoutGap="20px" >
+                    <mat-radio-button *ngFor="let y of years" [value]="y">
+                      {{y}}
+                    </mat-radio-button>
+                  </mat-radio-group>                
+                </div>
+                <div class="day">
+                    <form [formGroup]="weeklyForm" fxLayout="column" fxFlex="100">
+                        <div fxLayout="column">
+                            <div fxLayout="row" fxFlex="100" fxLayoutAlign="center">
+                                <mat-form-field class="start">
+                                    <label>STARTS FROM</label>
+                                    <mat-datepicker #picker6></mat-datepicker>
+                                    <input class="form-control" matInput
+                                        [max]="startEndDatesForm.controls['endDate'].value" formControlName="startDate"
+                                        [matDatepicker]="picker6" (dateInput)="addEvent('input', $event)">
+                                    <mat-datepicker-toggle matSuffix [for]="picker6"></mat-datepicker-toggle>
+                                </mat-form-field>
+                            </div>
+                            <div fxLayout="row" class="fff" fxFlex="100">
+                                <mat-radio-group fxLayout="row" fxFlex="100" formControlName="valueRadio">
+                                    <mat-radio-button name="end" value="1" fxFlex="50">
+                                        <div>
+                                            <mat-form-field class="formArea">
+                                                <label>ENDS BY</label>
+                                                <mat-datepicker #picker7>
+                                                </mat-datepicker>
+                                                <input class="form-control" matInput name="edn"
+                                                    [min]="startEndDatesForm.controls['startDate'].value"
+                                                    formControlName="endDate" [matDatepicker]="picker7" readonly>
+                                                <mat-datepicker-toggle matSuffix [for]="picker7">
+                                                </mat-datepicker-toggle>
+                                            </mat-form-field>
+                                        </div>
+                                    </mat-radio-button>
+                                    <mat-radio-button name="end" value="2" fxFlex="50">
+                                        <div fxLayoutAlign="center">
+                                            <mat-form-field class="formArea">
+                                                <div fxLayout="row" fxFlex="50">
+                                                    
+                                                    <input name="edn" matInput formControlName="occurence" class="line"
+                                                        type="number">
+                                                    <p>Occurances</p> &nbsp;
+                                                </div>
+                                            </mat-form-field>
+                                        </div>
+                                    </mat-radio-button>
+                                </mat-radio-group>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="ONE TIME">
+                
+            </mat-tab>
+
+
+            <mat-tab label="ON COMPLETION OF"> </mat-tab>
+
+        </mat-tab-group>
+    </mat-card-content>
+
+
+
+    <mat-card-footer class="card-footer">
+        <div  fxLayout="row" fxFlex="100" fxLayoutAlign="center center">
+            <div fxFlex="50">
+                <label>Have selected a <b>{{tabName}}</b> frequency</label>
+            </div>
+            <div fxFlex="50" fxLayoutAlign="end">
+                <label style="margin-top: 8px;margin-right: 5px;"><b> esc </b> to cancel</label> &nbsp;
+                <button (click)="onClickNext()" mat-raised-button color="primary">NEXT &nbsp; 
+                    <span class="material-icons">arrow_right_alt</span>
+                </button>
+            </div>
+        </div>
+    </mat-card-footer>
+
+</mat-card>
+
+
+<div class="date-event">
+    <span *ngFor="let date of dates"> {{ date | date:'dd-MMM-YYYY' }} </span>
+    
+</div> 

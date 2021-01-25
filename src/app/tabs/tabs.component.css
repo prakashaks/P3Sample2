@@ -1,0 +1,151 @@
+.container{
+    height: 50px;
+}
+.title{
+    margin-bottom: 0px;
+}
+
+.card-header { 
+    background-color: #f4f3f5;
+    text-align: left;
+    height: 50px;
+    border: 1px;
+  }
+.mat-card{
+    margin: 20px;
+    padding: 0px;
+}
+
+.freq{
+    margin: 0px 40px 20px 40px;
+    border-top: 1px;
+
+}
+.daily{
+    height: 150px;
+}
+
+.date{
+    margin: 50px;
+
+}
+
+.line{
+   width: 50px;
+   padding-left: 18px;
+   padding-top: 0px;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-left-width: 0px;
+    width: 22px;
+    margin-right: 4px;
+    padding-left: 10px;
+    height: 20px;
+}
+.occenence_label{
+    margin-right: 50px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    
+}
+.occenence_input{
+    margin-right: 7px;
+    margin-top: 3px;
+    margin-bottom: 8px;
+    margin-left: 10px;
+}
+.dat{
+    border: 0px;
+    border-top-width: 3px;
+    width: 100px;
+    height: 46px;
+
+}
+.day{
+    background-color: #f4f3f5;
+    padding: 50px;
+}
+/* .fff{
+    background-color: #ffffff;
+    margin-top: 16px;
+    margin-right: 15px;
+    margin-left: 12px;
+} */
+.label{
+    margin-top: 15px;
+    margin-left: 61px;
+    border-right-width: 0px;
+    margin-right: 31px;
+}
+
+
+.date-event {
+    height: 200px;
+    border: 1px solid #555;
+    overflow: auto;
+  }
+
+.highlight-dates{
+    background: rgba(56, 131, 230, 0.521);
+    border-radius: 100%;
+}
+
+/*.formArea{
+    min-width: 300px;
+}*/
+
+.label{
+    padding-right: 30px;
+}
+.back{
+    border: 0px;
+}
+
+.white{
+    width: 80%;
+    background: #ffffff;
+}
+.checkBox{
+    margin-top: 30px;
+    margin-bottom: 10px;
+
+}
+
+.bgcor{
+    background: #ffffff;
+}
+
+.ongoing{
+    margin-right: 7px;
+    margin-top: 3px;
+    margin-bottom: 8px;
+    margin-left: 10px;
+}
+.starts_form{
+    height: 200px ;
+    background-color:#f1f1f1
+}
+
+.bgcor1{
+    background: #f1f1f1;
+}
+
+.ends_after_input{
+    margin-top: 2px;
+    padding-left: 3px;
+    margin-left: 4px;
+    padding-right: 1px;
+    height: 38px;
+    width: 38px;
+    padding-top: 1px;
+    margin-bottom: 5px;
+
+}
+.p_text{
+    margin-left: 20px;
+}
+
+.invisible {
+    visibility: hidden;
+  }
